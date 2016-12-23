@@ -1,0 +1,1 @@
+substring(("a", "b", "c"), "a")
