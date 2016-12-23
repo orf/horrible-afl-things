@@ -1,0 +1,3 @@
+[submodule "pillow/Pillow"]
+	path = pillow/Pillow
+	url = https://github.com/python-pillow/Pillow.git
