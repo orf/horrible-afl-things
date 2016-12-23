@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/bin/bash
 rm a.out
-gcc prog.c $(python3.4-config --libs) $(python3.4-config --includes) $(python3.4-config --ldflags)
-./a.out Pillow.tmp/Tests/images/hopper.pcd
+AFL_INST_RATIO=100 AFL_HARDEN=1 ~/afl-2.35b/afl-clang-fast prog.c $(python3.5-config --libs) $(python3.5-config --includes) $(python3.5-config --ldflags)
+./a.out < Pillow/Tests/images/hopper.pcd
