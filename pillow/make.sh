@@ -1,6 +1,6 @@
 #!/usr/bin/bash
 
-pushd Pillow.tmp
+pushd Pillow/
 make clean
 AFL_HARDEN=0 CC=~/afl-2.35b/afl-clang-fast python3 setup.py bdist -d ../
 popd
