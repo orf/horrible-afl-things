@@ -16,13 +16,14 @@ main(int argc, char *argv[])
   PyErr_Print();
   //printf("%p", pModule);
   
-  PyObject *pFunc = PyObject_GetAttrString(pModule, "pcd_decoder");
+  PyObject *pFunc = PyObject_GetAttrString(pModule, "msp_decode");
  PyErr_Print();
   //printf("%p", pFunc);
 
-  PyObject *pArgs = PyTuple_New(2);
-  PyTuple_SetItem(pArgs, 0, PyUnicode_FromString("RGB"));
-  PyTuple_SetItem(pArgs, 1, PyUnicode_FromString("pcd"));
+  PyObject *pArgs = PyTuple_New(0);
+  //PyTuple_SetItem(pArgs, 0, PyUnicode_FromString("L"));
+  //PyTuple_SetItem(pArgs, 1, PyLong_FromLong(4));
+
   PyObject *pValue = PyObject_CallObject(pFunc, pArgs);
   //printf("%p", pValue);
   PyErr_Print();
@@ -30,20 +31,21 @@ main(int argc, char *argv[])
 
 
   //Image.core.new(self.mode, self.size)
-  PyObject *newImgArgs = PyTuple_New(2);
-  PyTuple_SetItem(newImgArgs, 0, PyUnicode_FromString("RGB"));
-  
+  PyObject *newImgArgs = PyTuple_New(3);
+  PyTuple_SetItem(newImgArgs, 0, PyUnicode_FromString("1"));
+ 
   PyObject *sizeTuple = PyTuple_New(2);
-  PyTuple_SetItem(sizeTuple, 0, PyLong_FromLong(768));
-  PyTuple_SetItem(sizeTuple, 1, PyLong_FromLong(512));
+  PyTuple_SetItem(sizeTuple, 0, PyLong_FromLong(128));
+  PyTuple_SetItem(sizeTuple, 1, PyLong_FromLong(128));
 
   PyTuple_SetItem(newImgArgs, 1, sizeTuple);
 
   PyObject *newImg = PyObject_CallObject(PyObject_GetAttrString(pModule, "new"), newImgArgs);
   //PyObject_Print(newImg, stdout, Py_PRINT_RAW);
 
-  PyObject *setImgArgs = PyTuple_New(1);
+  PyObject *setImgArgs = PyTuple_New(2);
   PyTuple_SetItem(setImgArgs, 0, newImg);
+  PyTuple_SetItem(setImgArgs, 1, sizeTuple);  
 
   PyObject *setImg = PyObject_GetAttrString(pValue, "setimage");
   PyObject *result = PyObject_CallObject(setImg, setImgArgs);
